@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int countPairsWithDiffK(vector<int>& arr, int n, int k) {
+    sort(arr.begin(), arr.end());
+
+    int count = 0;
+    int i = 0, j = 1;
+
+    while (j < n) {
+        if (i == j) {
+            j++;
+            continue;
+        }
+
+        int diff = arr[j] - arr[i];
+
+        if (diff == k) {
+            count++;
+            i++;
+            j++;
+        }
+        else if (diff < k) {
+            j++;
+        }
+        else {
+            i++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int n;
+        cin >> n;
+
+        vector<int> arr(n);
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+
+        int k;
+        cin >> k;
+
+        cout << countPairsWithDiffK(arr, n, k) << endl;
+    }
+
+    return 0;
+}
